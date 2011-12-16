@@ -1,5 +1,3 @@
-/* contrib/ptree/ptree.h */
-
 #ifndef __PTREE_H__
 #define __PTREE_H__
 
@@ -138,14 +136,14 @@ Datum		ltq_regex(PG_FUNCTION_ARGS);
 Datum		ltq_rregex(PG_FUNCTION_ARGS);
 Datum		lt_q_regex(PG_FUNCTION_ARGS);
 Datum		lt_q_rregex(PG_FUNCTION_ARGS);
-Datum		ltxtq_exec(PG_FUNCTION_ARGS);
-Datum		ltxtq_rexec(PG_FUNCTION_ARGS);
+Datum		ptxtq_exec(PG_FUNCTION_ARGS);
+Datum		ptxtq_rexec(PG_FUNCTION_ARGS);
 Datum		_ltq_regex(PG_FUNCTION_ARGS);
 Datum		_ltq_rregex(PG_FUNCTION_ARGS);
 Datum		_lt_q_regex(PG_FUNCTION_ARGS);
 Datum		_lt_q_rregex(PG_FUNCTION_ARGS);
-Datum		_ltxtq_exec(PG_FUNCTION_ARGS);
-Datum		_ltxtq_rexec(PG_FUNCTION_ARGS);
+Datum		_ptxtq_exec(PG_FUNCTION_ARGS);
+Datum		_ptxtq_rexec(PG_FUNCTION_ARGS);
 Datum		_ptree_isparent(PG_FUNCTION_ARGS);
 Datum		_ptree_risparent(PG_FUNCTION_ARGS);
 

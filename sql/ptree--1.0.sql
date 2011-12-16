@@ -406,31 +406,31 @@ CREATE OPERATOR ^? (
 	JOIN = contjoinsel
 );
 
-CREATE FUNCTION ltxtq_in(cstring)
+CREATE FUNCTION ptxtq_in(cstring)
 RETURNS ptxtquery
 AS 'MODULE_PATHNAME'
 LANGUAGE C STRICT;
 
-CREATE FUNCTION ltxtq_out(ptxtquery)
+CREATE FUNCTION ptxtq_out(ptxtquery)
 RETURNS cstring
 AS 'MODULE_PATHNAME'
 LANGUAGE C STRICT;
 
 CREATE TYPE ptxtquery (
 	INTERNALLENGTH = -1,
-	INPUT = ltxtq_in,
-	OUTPUT = ltxtq_out,
+	INPUT = ptxtq_in,
+	OUTPUT = ptxtq_out,
 	STORAGE = extended
 );
 
 -- operations WITH ptxtquery
 
-CREATE FUNCTION ltxtq_exec(ptree, ptxtquery)
+CREATE FUNCTION ptxtq_exec(ptree, ptxtquery)
 RETURNS bool
 AS 'MODULE_PATHNAME'
 LANGUAGE C STRICT IMMUTABLE;
 
-CREATE FUNCTION ltxtq_rexec(ptxtquery, ptree)
+CREATE FUNCTION ptxtq_rexec(ptxtquery, ptree)
 RETURNS bool
 AS 'MODULE_PATHNAME'
 LANGUAGE C STRICT IMMUTABLE;
@@ -438,7 +438,7 @@ LANGUAGE C STRICT IMMUTABLE;
 CREATE OPERATOR @ (
         LEFTARG = ptree,
 	RIGHTARG = ptxtquery,
-	PROCEDURE = ltxtq_exec,
+	PROCEDURE = ptxtq_exec,
 	COMMUTATOR = '@',
 	RESTRICT = contsel,
 	JOIN = contjoinsel
@@ -447,7 +447,7 @@ CREATE OPERATOR @ (
 CREATE OPERATOR @ (
         LEFTARG = ptxtquery,
 	RIGHTARG = ptree,
-	PROCEDURE = ltxtq_rexec,
+	PROCEDURE = ptxtq_rexec,
 	COMMUTATOR = '@',
 	RESTRICT = contsel,
 	JOIN = contjoinsel
@@ -457,7 +457,7 @@ CREATE OPERATOR @ (
 CREATE OPERATOR ^@ (
         LEFTARG = ptree,
 	RIGHTARG = ptxtquery,
-	PROCEDURE = ltxtq_exec,
+	PROCEDURE = ptxtq_exec,
 	COMMUTATOR = '^@',
 	RESTRICT = contsel,
 	JOIN = contjoinsel
@@ -466,7 +466,7 @@ CREATE OPERATOR ^@ (
 CREATE OPERATOR ^@ (
         LEFTARG = ptxtquery,
 	RIGHTARG = ptree,
-	PROCEDURE = ltxtq_rexec,
+	PROCEDURE = ptxtq_rexec,
 	COMMUTATOR = '^@',
 	RESTRICT = contsel,
 	JOIN = contjoinsel
@@ -579,12 +579,12 @@ RETURNS bool
 AS 'MODULE_PATHNAME'
 LANGUAGE C STRICT IMMUTABLE;
 
-CREATE FUNCTION _ltxtq_exec(_ptree, ptxtquery)
+CREATE FUNCTION _ptxtq_exec(_ptree, ptxtquery)
 RETURNS bool
 AS 'MODULE_PATHNAME'
 LANGUAGE C STRICT IMMUTABLE;
 
-CREATE FUNCTION _ltxtq_rexec(ptxtquery, _ptree)
+CREATE FUNCTION _ptxtq_rexec(ptxtquery, _ptree)
 RETURNS bool
 AS 'MODULE_PATHNAME'
 LANGUAGE C STRICT IMMUTABLE;
@@ -664,7 +664,7 @@ CREATE OPERATOR ? (
 CREATE OPERATOR @ (
         LEFTARG = _ptree,
 	RIGHTARG = ptxtquery,
-	PROCEDURE = _ltxtq_exec,
+	PROCEDURE = _ptxtq_exec,
         COMMUTATOR = '@',
         RESTRICT = contsel,
 	JOIN = contjoinsel
@@ -673,7 +673,7 @@ CREATE OPERATOR @ (
 CREATE OPERATOR @ (
         LEFTARG = ptxtquery,
 	RIGHTARG = _ptree,
-	PROCEDURE = _ltxtq_rexec,
+	PROCEDURE = _ptxtq_rexec,
         COMMUTATOR = '@',
         RESTRICT = contsel,
 	JOIN = contjoinsel
@@ -756,7 +756,7 @@ CREATE OPERATOR ^? (
 CREATE OPERATOR ^@ (
         LEFTARG = _ptree,
 	RIGHTARG = ptxtquery,
-	PROCEDURE = _ltxtq_exec,
+	PROCEDURE = _ptxtq_exec,
         COMMUTATOR = '^@',
         RESTRICT = contsel,
 	JOIN = contjoinsel
@@ -765,7 +765,7 @@ CREATE OPERATOR ^@ (
 CREATE OPERATOR ^@ (
         LEFTARG = ptxtquery,
 	RIGHTARG = _ptree,
-	PROCEDURE = _ltxtq_rexec,
+	PROCEDURE = _ptxtq_rexec,
         COMMUTATOR = '^@',
         RESTRICT = contsel,
 	JOIN = contjoinsel
@@ -805,7 +805,7 @@ CREATE OPERATOR ?~ (
 	PROCEDURE = _ltq_extract_regex
 );
 
-CREATE FUNCTION _ltxtq_extract_exec(_ptree,ptxtquery)
+CREATE FUNCTION _ptxtq_extract_exec(_ptree,ptxtquery)
 RETURNS ptree
 AS 'MODULE_PATHNAME'
 LANGUAGE C STRICT IMMUTABLE;
@@ -813,7 +813,7 @@ LANGUAGE C STRICT IMMUTABLE;
 CREATE OPERATOR ?@ (
         LEFTARG = _ptree,
 	RIGHTARG = ptxtquery,
-	PROCEDURE = _ltxtq_extract_exec
+	PROCEDURE = _ptxtq_extract_exec
 );
 
 --GiST support for ptree[]

@@ -10,11 +10,11 @@
 #include "crc32.h"
 #include "ptree.h"
 
-PG_FUNCTION_INFO_V1(ltxtq_in);
-Datum		ltxtq_in(PG_FUNCTION_ARGS);
+PG_FUNCTION_INFO_V1(ptxtq_in);
+Datum		ptxtq_in(PG_FUNCTION_ARGS);
 
-PG_FUNCTION_INFO_V1(ltxtq_out);
-Datum		ltxtq_out(PG_FUNCTION_ARGS);
+PG_FUNCTION_INFO_V1(ptxtq_out);
+Datum		ptxtq_out(PG_FUNCTION_ARGS);
 
 
 /* parser's states */
@@ -376,7 +376,7 @@ queryin(char *buf)
  * in without morphology
  */
 Datum
-ltxtq_in(PG_FUNCTION_ARGS)
+ptxtq_in(PG_FUNCTION_ARGS)
 {
 	PG_RETURN_POINTER(queryin((char *) PG_GETARG_POINTER(0)));
 }
@@ -503,7 +503,7 @@ infix(INFIX *in, bool first)
 }
 
 Datum
-ltxtq_out(PG_FUNCTION_ARGS)
+ptxtq_out(PG_FUNCTION_ARGS)
 {
 	ptxtquery  *query = PG_GETARG_LTXTQUERY(0);
 	INFIX		nrm;

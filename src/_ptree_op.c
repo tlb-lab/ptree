@@ -20,8 +20,8 @@ PG_FUNCTION_INFO_V1(_ltq_regex);
 PG_FUNCTION_INFO_V1(_ltq_rregex);
 PG_FUNCTION_INFO_V1(_lt_q_regex);
 PG_FUNCTION_INFO_V1(_lt_q_rregex);
-PG_FUNCTION_INFO_V1(_ltxtq_exec);
-PG_FUNCTION_INFO_V1(_ltxtq_rexec);
+PG_FUNCTION_INFO_V1(_ptxtq_exec);
+PG_FUNCTION_INFO_V1(_ptxtq_rexec);
 
 Datum		_ptree_r_isparent(PG_FUNCTION_ARGS);
 Datum		_ptree_r_risparent(PG_FUNCTION_ARGS);
@@ -29,11 +29,11 @@ Datum		_ptree_r_risparent(PG_FUNCTION_ARGS);
 PG_FUNCTION_INFO_V1(_ptree_extract_isparent);
 PG_FUNCTION_INFO_V1(_ptree_extract_risparent);
 PG_FUNCTION_INFO_V1(_ltq_extract_regex);
-PG_FUNCTION_INFO_V1(_ltxtq_extract_exec);
+PG_FUNCTION_INFO_V1(_ptxtq_extract_exec);
 Datum		_ptree_extract_isparent(PG_FUNCTION_ARGS);
 Datum		_ptree_extract_risparent(PG_FUNCTION_ARGS);
 Datum		_ltq_extract_regex(PG_FUNCTION_ARGS);
-Datum		_ltxtq_extract_exec(PG_FUNCTION_ARGS);
+Datum		_ptxtq_extract_exec(PG_FUNCTION_ARGS);
 
 PG_FUNCTION_INFO_V1(_lca);
 Datum		_lca(PG_FUNCTION_ARGS);
@@ -184,11 +184,11 @@ _lt_q_rregex(PG_FUNCTION_ARGS)
 
 
 Datum
-_ltxtq_exec(PG_FUNCTION_ARGS)
+_ptxtq_exec(PG_FUNCTION_ARGS)
 {
 	ArrayType  *la = PG_GETARG_ARRAYTYPE_P(0);
 	ptxtquery  *query = PG_GETARG_LTXTQUERY(1);
-	bool		res = array_iterator(la, ltxtq_exec, (void *) query, NULL);
+	bool		res = array_iterator(la, ptxtq_exec, (void *) query, NULL);
 
 	PG_FREE_IF_COPY(la, 0);
 	PG_FREE_IF_COPY(query, 1);
@@ -196,9 +196,9 @@ _ltxtq_exec(PG_FUNCTION_ARGS)
 }
 
 Datum
-_ltxtq_rexec(PG_FUNCTION_ARGS)
+_ptxtq_rexec(PG_FUNCTION_ARGS)
 {
-	PG_RETURN_DATUM(DirectFunctionCall2(_ltxtq_exec,
+	PG_RETURN_DATUM(DirectFunctionCall2(_ptxtq_exec,
 										PG_GETARG_DATUM(1),
 										PG_GETARG_DATUM(0)
 										));
@@ -275,14 +275,14 @@ _ltq_extract_regex(PG_FUNCTION_ARGS)
 }
 
 Datum
-_ltxtq_extract_exec(PG_FUNCTION_ARGS)
+_ptxtq_extract_exec(PG_FUNCTION_ARGS)
 {
 	ArrayType  *la = PG_GETARG_ARRAYTYPE_P(0);
 	ptxtquery  *query = PG_GETARG_LTXTQUERY(1);
 	ptree	   *found,
 			   *item;
 
-	if (!array_iterator(la, ltxtq_exec, (void *) query, &found))
+	if (!array_iterator(la, ptxtq_exec, (void *) query, &found))
 	{
 		PG_FREE_IF_COPY(la, 0);
 		PG_FREE_IF_COPY(query, 1);

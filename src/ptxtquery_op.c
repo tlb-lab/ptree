@@ -9,8 +9,8 @@
 
 #include "ptree.h"
 
-PG_FUNCTION_INFO_V1(ltxtq_exec);
-PG_FUNCTION_INFO_V1(ltxtq_rexec);
+PG_FUNCTION_INFO_V1(ptxtq_exec);
+PG_FUNCTION_INFO_V1(ptxtq_rexec);
 
 /*
  * check for boolean condition
@@ -81,7 +81,7 @@ checkcondition_str(void *checkval, ITEM *val)
 }
 
 Datum
-ltxtq_exec(PG_FUNCTION_ARGS)
+ptxtq_exec(PG_FUNCTION_ARGS)
 {
 	ptree	   *val = PG_GETARG_PTREE(0);
 	ptxtquery  *query = PG_GETARG_LTXTQUERY(1);
@@ -104,9 +104,9 @@ ltxtq_exec(PG_FUNCTION_ARGS)
 }
 
 Datum
-ltxtq_rexec(PG_FUNCTION_ARGS)
+ptxtq_rexec(PG_FUNCTION_ARGS)
 {
-	PG_RETURN_DATUM(DirectFunctionCall2(ltxtq_exec,
+	PG_RETURN_DATUM(DirectFunctionCall2(ptxtq_exec,
 										PG_GETARG_DATUM(1),
 										PG_GETARG_DATUM(0)
 										));

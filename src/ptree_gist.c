@@ -700,7 +700,7 @@ ptree_consistent(PG_FUNCTION_ARGS)
 		case 15:
 			query = PG_GETARG_LQUERY(1);
 			if (GIST_LEAF(entry))
-				res = DatumGetBool(DirectFunctionCall2(ltxtq_exec,
+				res = DatumGetBool(DirectFunctionCall2(ptxtq_exec,
 											  PointerGetDatum(LTG_NODE(key)),
 											PointerGetDatum((pquery *) query)
 													   ));
